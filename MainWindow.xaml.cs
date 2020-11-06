@@ -36,6 +36,8 @@ namespace Calalb_Ana_Lab5
             tblPhoneNumbersAdapter = new PhoneNumbersDataSetTableAdapters.PhoneNumbersTableAdapter();
         Binding txtPhoneNumberBinding = new Binding();
         Binding txtSubscriberBinding = new Binding();
+        Binding txtContractValueBinding = new Binding();
+        Binding txtContractDateBinding = new Binding();
 
         public MainWindow()
         {
@@ -44,8 +46,12 @@ namespace Calalb_Ana_Lab5
             grdMain.DataContext = phoneNumbersDataSet.PhoneNumbers;
             txtPhoneNumberBinding.Path = new PropertyPath("Phonenum");
             txtSubscriberBinding.Path = new PropertyPath("Subscriber");
+            txtContractValueBinding.Path = new PropertyPath("ContractValue");
+            txtContractDateBinding.Path = new PropertyPath("ContractDate");
             txtPhoneNumber.SetBinding(TextBox.TextProperty, txtPhoneNumberBinding);
             txtSubscriber.SetBinding(TextBox.TextProperty, txtSubscriberBinding);
+            txtContractValue.SetBinding(TextBox.TextProperty, txtContractValueBinding);
+            txtContractDate.SetBinding(TextBox.TextProperty, txtContractDateBinding);
         }
 
         private void lstPhonesLoad()
@@ -89,11 +95,17 @@ namespace Calalb_Ana_Lab5
             btnNext.IsEnabled = false;
             txtPhoneNumber.IsEnabled = true;
             txtSubscriber.IsEnabled = true;
+            txtContractValue.IsEnabled = true;
+            txtContractDate.IsEnabled = true;
 
             BindingOperations.ClearBinding(txtPhoneNumber, TextBox.TextProperty);
             BindingOperations.ClearBinding(txtSubscriber, TextBox.TextProperty);
+            BindingOperations.ClearBinding(txtContractValue, TextBox.TextProperty);
+            BindingOperations.ClearBinding(txtContractDate, TextBox.TextProperty);
             txtPhoneNumber.Text = "";
             txtSubscriber.Text = "";
+            txtContractValue.Text = "";
+            txtContractDate.Text = "";
             Keyboard.Focus(txtPhoneNumber);
         }
 
@@ -102,6 +114,8 @@ namespace Calalb_Ana_Lab5
             action = ActionState.Edit;
             string tempPhonenum = txtPhoneNumber.Text.ToString();
             string tempSubscriber = txtSubscriber.Text.ToString();
+            string tempContractValue = txtContractValue.Text.ToString();
+            string tempContractDate = txtContractDate.Text.ToString();
 
             btnNew.IsEnabled = false;
             btnEdit.IsEnabled = false;
@@ -114,11 +128,17 @@ namespace Calalb_Ana_Lab5
             btnNext.IsEnabled = false;
             txtPhoneNumber.IsEnabled = true;
             txtSubscriber.IsEnabled = true;
+            txtContractValue.IsEnabled = true;
+            txtContractDate.IsEnabled = true;
 
             BindingOperations.ClearBinding(txtPhoneNumber, TextBox.TextProperty);
             BindingOperations.ClearBinding(txtSubscriber, TextBox.TextProperty);
+            BindingOperations.ClearBinding(txtContractValue, TextBox.TextProperty);
+            BindingOperations.ClearBinding(txtContractDate, TextBox.TextProperty);
             txtPhoneNumber.Text = tempPhonenum;
             txtSubscriber.Text = tempSubscriber;
+            txtContractValue.Text = tempContractValue;
+            txtContractDate.Text = tempContractDate;
             Keyboard.Focus(txtPhoneNumber);
         }
 
@@ -127,6 +147,8 @@ namespace Calalb_Ana_Lab5
             action = ActionState.Delete;
             string tempPhonenum = txtPhoneNumber.Text.ToString();
             string tempSubscriber = txtSubscriber.Text.ToString();
+            string tempContractValue = txtContractValue.Text.ToString();
+            string tempContractDate = txtContractDate.Text.ToString();
 
             btnNew.IsEnabled = false;
             btnEdit.IsEnabled = false;
@@ -140,8 +162,12 @@ namespace Calalb_Ana_Lab5
             
             BindingOperations.ClearBinding(txtPhoneNumber, TextBox.TextProperty);
             BindingOperations.ClearBinding(txtSubscriber, TextBox.TextProperty);
+            BindingOperations.ClearBinding(txtContractValue, TextBox.TextProperty);
+            BindingOperations.ClearBinding(txtContractDate, TextBox.TextProperty);
             txtPhoneNumber.Text = tempPhonenum;
             txtSubscriber.Text = tempSubscriber;
+            txtContractValue.Text = tempContractValue;
+            txtContractDate.Text = tempContractDate;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -159,9 +185,13 @@ namespace Calalb_Ana_Lab5
             btnNext.IsEnabled = true;
             txtPhoneNumber.IsEnabled = false;
             txtSubscriber.IsEnabled = false;
+            txtContractValue.IsEnabled = false;
+            txtContractDate.IsEnabled = false;
 
             txtPhoneNumber.SetBinding(TextBox.TextProperty, txtPhoneNumberBinding);
             txtSubscriber.SetBinding(TextBox.TextProperty, txtSubscriberBinding);
+            txtContractValue.SetBinding(TextBox.TextProperty, txtContractValueBinding);
+            txtContractDate.SetBinding(TextBox.TextProperty, txtContractDateBinding);
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -174,6 +204,8 @@ namespace Calalb_Ana_Lab5
                     newRow.BeginEdit();
                     newRow["Phonenum"] = txtPhoneNumber.Text.Trim();
                     newRow["Subscriber"] = txtSubscriber.Text.Trim();
+                    newRow["ContractValue"] = txtContractValue.Text.Trim();
+                    newRow["ContractDate"] = txtContractDate.Text.Trim();
                     newRow.EndEdit();
                     phoneNumbersDataSet.PhoneNumbers.Rows.Add(newRow);
                     tblPhoneNumbersAdapter.Update(phoneNumbersDataSet.PhoneNumbers);
@@ -195,6 +227,8 @@ namespace Calalb_Ana_Lab5
                 btnNext.IsEnabled = true;
                 txtPhoneNumber.IsEnabled = false;
                 txtSubscriber.IsEnabled = false;
+                txtContractValue.IsEnabled = false;
+                txtContractDate.IsEnabled = false;
             }
             else
                 if(action == ActionState.Edit)
@@ -205,6 +239,8 @@ namespace Calalb_Ana_Lab5
                     editRow.BeginEdit();
                     editRow["Phonenum"] = txtPhoneNumber.Text.Trim();
                     editRow["Subscriber"] = txtSubscriber.Text.Trim();
+                    editRow["ContractValue"] = txtContractValue.Text.Trim();
+                    editRow["ContractDate"] = txtContractDate.Text.Trim();
                     editRow.EndEdit();
                     tblPhoneNumbersAdapter.Update(phoneNumbersDataSet.PhoneNumbers);
                     phoneNumbersDataSet.AcceptChanges();
@@ -225,9 +261,13 @@ namespace Calalb_Ana_Lab5
                 btnNext.IsEnabled = true;
                 txtPhoneNumber.IsEnabled = false;
                 txtSubscriber.IsEnabled = false;
+                txtContractValue.IsEnabled = false;
+                txtContractDate.IsEnabled = false;
 
                 txtPhoneNumber.SetBinding(TextBox.TextProperty, txtPhoneNumberBinding);
                 txtSubscriber.SetBinding(TextBox.TextProperty, txtSubscriberBinding);
+                txtContractValue.SetBinding(TextBox.TextProperty, txtContractValueBinding);
+                txtContractDate.SetBinding(TextBox.TextProperty, txtContractDateBinding);
             }
             else
                 if(action == ActionState.Delete)
@@ -257,9 +297,13 @@ namespace Calalb_Ana_Lab5
                 btnNext.IsEnabled = true;
                 txtPhoneNumber.IsEnabled = false;
                 txtSubscriber.IsEnabled = false;
+                txtContractValue.IsEnabled = false;
+                txtContractDate.IsEnabled = false;
 
                 txtPhoneNumber.SetBinding(TextBox.TextProperty, txtPhoneNumberBinding);
                 txtSubscriber.SetBinding(TextBox.TextProperty, txtSubscriberBinding);
+                txtContractValue.SetBinding(TextBox.TextProperty, txtContractValueBinding);
+                txtContractDate.SetBinding(TextBox.TextProperty, txtContractDateBinding);
             }
         }
 
